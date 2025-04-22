@@ -4,7 +4,7 @@ const requiredEnvVars = ['DB_HOST', 'DB_USER', 'DB_PASSWORD', 'DB_NAME'];
 const missingVars = requiredEnvVars.filter((varName) => !process.env[varName]);
 
 if (missingVars.length) {
-    console.error(`❌ Missing required environment variables: ${missingVars.join(', ')}`);
+    console.error(` Missing required environment variables: ${missingVars.join(', ')}`);
     process.exit(1); // Exit process if required variables are missing
 }
 
@@ -26,23 +26,23 @@ const testDatabaseConnection = async () => {
         console.log('✅ Connected to MySQL');
         connection.release(); // Release the connection after successful check
     } catch (error) {
-        console.error('❌ MySQL Connection Error:', error.message);
+        console.error(' MySQL Connection Error:', error.message);
 
         switch (error.code) {
             case 'ER_ACCESS_DENIED_ERROR':
-                console.error('❌ Access denied! Check your MySQL credentials.');
+                console.error(' Access denied! Check your MySQL credentials.');
                 break;
             case 'ER_BAD_DB_ERROR':
-                console.error('❌ Database not found! Check if the database exists.');
+                console.error(' Database not found! Check if the database exists.');
                 break;
             case 'ECONNREFUSED':
-                console.error('❌ Connection refused! Ensure MySQL is running and accessible.');
+                console.error(' Connection refused! Ensure MySQL is running and accessible.');
                 break;
             case 'ETIMEDOUT':
-                console.error('❌ Connection timeout! Check network settings.');
+                console.error(' Connection timeout! Check network settings.');
                 break;
             default:
-                console.error('❌ Unknown MySQL error:', error.code);
+                console.error(' Unknown MySQL error:', error.code);
         }
 
         process.exit(1); // Stop the application if database connection fails
