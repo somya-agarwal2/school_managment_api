@@ -3,7 +3,7 @@
     {
       "src":"/app.js",
       "dest":"/",
-    };
+    },
     {
       "src":"/test",
       "dest":"/",
